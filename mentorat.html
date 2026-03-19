@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentorat — Expertise Afrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:#fff; color:#12082E; overflow-x:hidden; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:#fff; border-bottom:2px solid #12082E;
+  display:flex; align-items:center; justify-content:space-between; padding:1.1rem 5%;
+}
+.logo { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:#12082E; text-decoration:none; }
+.logo span { color:#DD536C; }
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-back { display:flex; align-items:center; gap:.5rem; font-size:.82rem; font-weight:500; color:#666; text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:#390CA3; }
+.nav-back svg { width:16px; height:16px; }
+.nav-badge { background:#8CEBB4; color:#0a3d26; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .8rem; }
+
+/* ── HERO ── */
+.hero {
+  margin-top: 65px;
+  min-height: 560px;
+}
+
+.hero-left {
+  background: #12082E;
+  padding: 5rem 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  min-height: 560px;
+  max-width: 100%; 
+}
+.hero-left::before {
+  content:'M'; position:absolute; right:-.08em; top:-.1em;
+  font-family:'Playfair Display',serif; font-size:28rem; font-weight:700; line-height:1;
+  color:rgba(255,255,255,.03); pointer-events:none;
+}
+
+/* Decorative circles */
+.hero-deco {
+  position:absolute; top:3rem; right:3rem;
+  width:120px; height:120px; border-radius:50%;
+  border:1px solid rgba(140,235,180,.15);
+}
+.hero-deco::before {
+  content:''; position:absolute; top:12px; left:12px; right:12px; bottom:12px;
+  border-radius:50%; border:1px solid rgba(221,83,108,.2);
+}
+.hero-deco::after {
+  content:''; position:absolute; top:28px; left:28px; right:28px; bottom:28px;
+  border-radius:50%; background:rgba(57,12,163,.3);
+}
+
+.hero-breadcrumb {
+  position:absolute; top:2.5rem; left:5%;
+  display:flex; align-items:center; gap:.5rem;
+  font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.hero-breadcrumb span { color:#8CEBB4; }
+
+.hero-tag {
+  background:#DD536C; color:#fff;
+  font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  padding:.3rem .8rem; width:fit-content; margin-bottom:1.4rem;
+}
+
+/* Title + button on same line */
+.hero-title-row {
+  display:flex;
+  align-items:center;
+  gap:2.5rem;
+  flex-wrap:wrap;
+  margin-bottom:1.5rem;
+}
+
+.hero-left h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.5rem,7vw,7rem);
+  font-weight:700; line-height:.95; letter-spacing:-.02em;
+  color:#fff;
+  margin-bottom:0;
+}
+.hero-left h1 em { font-style:italic; color:#8CEBB4; }
+
+.btn-hero-main {
+  background:#8CEBB4; color:#0a3d26;
+  font-size:.88rem; font-weight:600;
+  padding:.95rem 2rem;
+  text-decoration:none;
+  transition:background .25s, transform .25s;
+  display:inline-block;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.btn-hero-main:hover { background:#DD536C; color:#fff; transform:translateY(-2px); }
+
+.hero-left p {
+  font-size:.95rem; font-weight:300; line-height:1.8;
+  color:rgba(255,255,255,.55); max-width:420px;
+}
+
+/* ── STRIP ── */
+.strip { background:#12082E; padding:.75rem 0; overflow:hidden; white-space:nowrap; }
+.strip-inner { display:inline-flex; gap:3rem; align-items:center; animation:slide 22s linear infinite; }
+.strip-item { font-size:.7rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.4); flex-shrink:0; display:flex; align-items:center; gap:3rem; }
+.strip-item::after { content:'◆'; color:#8CEBB4; font-size:.45rem; }
+@keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── INTRO ── */
+.intro {
+  padding:5rem 5%; display:grid; grid-template-columns:1fr 2fr; gap:6rem; align-items:start;
+  border-bottom:1px solid rgba(18,8,46,.1);
+}
+.intro-label { padding-top:.2rem; }
+.intro-num { font-family:'Playfair Display',serif; font-size:5rem; font-weight:700; line-height:1; color:#8CEBB4; opacity:.3; margin-bottom:.5rem; }
+.intro-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; }
+.intro-content h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.8rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; }
+.intro-content h2 em { font-style:italic; color:#390CA3; }
+.intro-content p { font-size:.95rem; font-weight:300; line-height:1.85; color:rgba(18,8,46,.55); margin-bottom:1.2rem; max-width:560px; }
+.intro-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.8rem; }
+.itag { font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:.32rem .85rem; border:1px solid rgba(18,8,46,.12); color:rgba(18,8,46,.5); transition:all .2s; cursor:default; }
+.itag:hover { background:#390CA3; color:#fff; border-color:#390CA3; }
+
+/* ── DOMAINES ── */
+.domaines { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.dom-header { display:flex; align-items:baseline; justify-content:space-between; padding-bottom:1.4rem; border-bottom:2px solid #12082E; margin-bottom:3rem; }
+.dom-header h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.dom-header h2 em { font-style:italic; color:#DD536C; }
+.dom-count { font-size:.75rem; font-weight:500; color:#888; letter-spacing:.06em; }
+
+.dom-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.dom-card {
+  padding:2.2rem 2rem; border:1px solid rgba(18,8,46,.06);
+  position:relative; overflow:hidden; cursor:default; transition:background .3s;
+}
+.dom-card:hover { background:#fafafa; }
+.dom-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; transition:height .4s; }
+.dom-card:nth-child(1)::before { background:#DD536C; }
+.dom-card:nth-child(2)::before { background:#390CA3; }
+.dom-card:nth-child(3)::before { background:#8CEBB4; }
+.dom-card:hover::before { height:100%; }
+
+.dom-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem; }
+.dom-card:nth-child(1) .dom-icon { background:#DD536C18; }
+.dom-card:nth-child(2) .dom-icon { background:#390CA318; }
+.dom-card:nth-child(3) .dom-icon { background:#8CEBB430; }
+.dom-icon svg { width:20px; height:20px; }
+
+.dom-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:.5rem; }
+.dom-desc { font-size:.8rem; font-weight:300; line-height:1.7; color:rgba(18,8,46,.5); }
+
+/* ── PROCESS ── */
+.process { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.process-header { margin-bottom:3.5rem; }
+.process-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:.6rem; }
+.process-header h2 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; }
+.process-header h2 em { font-style:italic; color:#DD536C; }
+
+.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-left:1px solid rgba(18,8,46,.1); }
+.pstep { border-right:1px solid rgba(18,8,46,.1); padding:2.2rem 1.8rem; }
+.pstep-num { font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:700; line-height:1; opacity:.07; margin-bottom:1rem; }
+.pstep-bar { width:28px; height:3px; margin-bottom:1rem; }
+.pstep:nth-child(1) .pstep-bar { background:#DD536C; }
+.pstep:nth-child(2) .pstep-bar { background:#390CA3; }
+.pstep:nth-child(3) .pstep-bar { background:#8CEBB4; }
+.pstep:nth-child(4) .pstep-bar { background:#DD536C; }
+.pstep-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:.6rem; }
+.pstep-desc { font-size:.8rem; font-weight:300; line-height:1.7; color:rgba(18,8,46,.5); }
+
+/* ── CTA ── */
+.cta-section {
+  background:#DD536C; padding:5rem 5%;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+  position:relative; overflow:hidden;
+}
+.cta-section::before { content:''; position:absolute; right:-150px; top:-150px; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,.05); pointer-events:none; }
+.cta-left { position:relative; z-index:2; }
+.cta-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:1rem; }
+.cta-left h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:700; line-height:1.05; color:#fff; margin-bottom:1.2rem; }
+.cta-left h2 em { font-style:italic; color:#8CEBB4; }
+.cta-left p { font-size:.92rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,.7); }
+.cta-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; align-items:flex-start; justify-content:center; }
+.cta-btn { background:#12082E; color:#fff; font-size:.88rem; font-weight:600; padding:1rem 2.5rem; border:none; font-family:'Inter',sans-serif; cursor:pointer; transition:background .2s; }
+.cta-btn:hover { background:#8CEBB4; color:#0a3d26; }
+
+/* ── FOOTER ── */
+footer { background:#12082E; color:rgba(255,255,255,.85); padding:4rem 5% 2rem; }
+.ft-top { display:grid; grid-template-columns:2fr 1fr; gap:4rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:1.5rem; }
+.ft-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:.6rem; }
+.ft-logo span { color:#DD536C; }
+.ft-desc { font-size:.8rem; color:rgba(255,255,255,.35); line-height:1.7; }
+.ft-head { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:1rem; }
+.ft-list { list-style:none; }
+.ft-list li { margin-bottom:.4rem; }
+.ft-list a { font-size:.8rem; color:rgba(255,255,255,.35); text-decoration:none; transition:color .2s; }
+.ft-list a:hover { color:#fff; }
+.ft-bottom { display:flex; justify-content:space-between; font-size:.7rem; color:rgba(255,255,255,.2); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(22px); transition:opacity .7s ease,transform .7s ease; }
+.rv.on { opacity:1; transform:none; }
+.rv2 { transition-delay:.1s; } .rv3 { transition-delay:.2s; } .rv4 { transition-delay:.3s; }
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .hero-left { max-width:100%; }
+  .hero-title-row { gap:1.5rem; }
+  .hero-left h1 { font-size:3rem; }
+  .intro { grid-template-columns:1fr; gap:2rem; }
+  .dom-grid { grid-template-columns:1fr 1fr; }
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .cta-section { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr; gap:2rem; }
+  .ft-bottom { flex-direction:column; gap:.5rem; }
+  .nav-back span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Expertise <span>Afrique</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Retour à l'accueil</span>
+    </a>
+    <div class="nav-badge">Mentorat</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-deco"></div>
+    <div class="hero-breadcrumb">Expertise Afrique · <span>Aide à la décision</span></div>
+    <div class="hero-tag">Pilier 04 — Décision</div>
+    <div class="hero-title-row">
+      <h1>Mento<em>rat</em></h1>
+      <a href="#rejoindre" class="btn-hero-main">Trouver mon mentor →</a>
+    </div>
+    <p>Des mentors expérimentés pour guider vos décisions stratégiques, académiques et entrepreneuriales avec sagesse et méthode.</p>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Accompagnement personnalisé</span>
+    <span class="strip-item">Mentors certifiés</span>
+    <span class="strip-item">Sessions 1-to-1</span>
+    <span class="strip-item">Plans d'action concrets</span>
+    <span class="strip-item">54 pays couverts</span>
+    <span class="strip-item">Accompagnement personnalisé</span>
+    <span class="strip-item">Mentors certifiés</span>
+    <span class="strip-item">Sessions 1-to-1</span>
+    <span class="strip-item">Plans d'action concrets</span>
+    <span class="strip-item">54 pays couverts</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-label rv">
+    <div class="intro-num">04</div>
+    <div class="intro-tag">Notre approche</div>
+  </div>
+  <div class="intro-content rv rv2">
+    <h2>Décider avec <em>clarté</em>,<br>avancer avec méthode</h2>
+    <p>Le mentorat chez Expertise Afrique n'est pas un simple conseil — c'est un accompagnement structuré, ancré dans les réalités africaines, piloté par des professionnels qui ont tracé le chemin avant vous.</p>
+    <p>Chaque relation mentor-mentoré est construite sur la confiance, la rigueur et l'ambition de produire des résultats concrets. Que vous lanciez une activité, naviguiez dans une carrière complexe ou preniez des décisions organisationnelles critiques, votre mentor est à vos côtés.</p>
+    <div class="intro-tags">
+      <span class="itag">Leadership</span>
+      <span class="itag">Carrière</span>
+      <span class="itag">Stratégie</span>
+      <span class="itag">Innovation</span>
+      <span class="itag">Politique publique</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAINES -->
+<section class="domaines">
+  <div class="dom-header rv">
+    <h2>Domaines de <em>mentorat</em></h2>
+    <span class="dom-count">03 domaines</span>
+  </div>
+  <div class="dom-grid">
+    <div class="dom-card rv">
+      <div class="dom-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M10 2L12.5 7.5L18 8.3L14 12.2L15 18L10 15.3L5 18L6 12.2L2 8.3L7.5 7.5Z" stroke="#DD536C" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="dom-name">Entrepreneuriat</div>
+      <p class="dom-desc">Lancement, structuration et croissance de votre entreprise. De l'idée au marché africain et international.</p>
+    </div>
+    <div class="dom-card rv rv2">
+      <div class="dom-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M4 17L10 5L16 17" stroke="#390CA3" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M7 13h6" stroke="#390CA3" stroke-width="1" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="dom-name">Finance & Investissement</div>
+      <p class="dom-desc">Stratégies de financement, levée de fonds, gestion financière et investissement sur le continent.</p>
+    </div>
+    <div class="dom-card rv rv3">
+      <div class="dom-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="4" width="16" height="12" rx="2" stroke="#1a9162" stroke-width="1.4"/>
+          <path d="M2 8h16" stroke="#1a9162" stroke-width="1"/>
+          <path d="M7 12h6" stroke="#1a9162" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="dom-name">Politique publique</div>
+      <p class="dom-desc">Conception et évaluation de politiques, plaidoyer institutionnel et gouvernance publique africaine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header rv">
+    <div class="process-label">Comment ça marche</div>
+    <h2>Un accompagnement <em>structuré</em></h2>
+  </div>
+  <div class="process-steps">
+    <div class="pstep rv">
+      <div class="pstep-num">01</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Postuler & choisir</div>
+      <p class="pstep-desc">Complétez votre profil, définissez vos objectifs et choisissez le mentor dont l'expertise correspond à votre besoin.</p>
+    </div>
+    <div class="pstep rv rv2">
+      <div class="pstep-num">02</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Session de découverte</div>
+      <p class="pstep-desc">Une première session gratuite de 30 minutes pour aligner les attentes et confirmer la relation de mentorat.</p>
+    </div>
+    <div class="pstep rv rv3">
+      <div class="pstep-num">03</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Plan d'accompagnement</div>
+      <p class="pstep-desc">Votre mentor co-construit avec vous un plan sur mesure avec des objectifs clairs, des jalons et des livrables concrets.</p>
+    </div>
+    <div class="pstep rv rv4">
+      <div class="pstep-num">04</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Sessions régulières & suivi</div>
+      <p class="pstep-desc">Des sessions bi-mensuelles en visio, des échanges asynchrones et un bilan trimestriel pour mesurer vos progrès.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="rejoindre">
+  <div class="cta-left rv">
+    <div class="cta-tag">Demander un mentor</div>
+    <h2>Trouvez le mentor qui changera votre <em>trajectoire</em></h2>
+    <p>Session de découverte gratuite. Réponse sous 48h. Accompagnement 100% adapté à votre contexte africain.</p>
+  </div>
+  <div class="cta-right rv rv2">
+    <button class="cta-btn">Rejoindre le mentorat →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Expertise <span>Afrique</span></div>
+      <p class="ft-desc">L'intelligence collective africaine structurée en quatre piliers pour transformer le continent.</p>
+    </div>
+    <div>
+      <div class="ft-head">Services</div>
+      <ul class="ft-list">
+        <li><a href="thinktank.html">ThinkTank</a></li>
+        <li><a href="moodle.html">Moodle</a></li>
+        <li><a href="kalema.html">Réseau Kalema</a></li>
+        <li><a href="#">Mentorat</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Expertise Afrique — Tous droits réservés</span>
+    <span>Mentorat · Pilier 04</span>
+  </div>
+</footer>
+
+<script>
+const rObs = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); });
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => rObs.observe(el));
+</script>
+</body>
+</html>

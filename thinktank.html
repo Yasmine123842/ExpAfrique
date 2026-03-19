@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThinkTank — Expertise Afrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #12082E;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: #fff;
+  border-bottom: 2px solid #12082E;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 5%;
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700; color: #12082E;
+  text-decoration: none;
+}
+.logo span { color: #DD536C; }
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-back {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .82rem; font-weight: 500; color: #666;
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-back:hover { color: #390CA3; }
+.nav-back svg { width:16px; height:16px; }
+.nav-badge {
+  background: #DD536C; color: white;
+  font-size: .68rem; font-weight: 600; letter-spacing:.08em;
+  text-transform: uppercase; padding: .3rem .8rem;
+}
+
+/* ── HERO ── */
+.hero {
+  margin-top: 65px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+}
+
+.hero-left {
+  background: #390CA3;
+  padding: 5rem 5%;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; overflow: hidden;
+}
+.hero-left::before {
+  content: 'TT';
+  position: absolute; right:-.1em; top:-.15em;
+  font-family: 'Playfair Display', serif;
+  font-size: 28rem; font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,.04); pointer-events:none;
+}
+.hero-breadcrumb {
+  position: absolute; top: 2.5rem; left: 5%;
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .72rem; font-weight: 500; letter-spacing:.06em; text-transform:uppercase;
+  color: rgba(255,255,255,.4);
+}
+.hero-breadcrumb span { color: #8CEBB4; }
+.hero-tag {
+  background: #8CEBB4; color: #0a3d26;
+  font-size: .68rem; font-weight: 700; letter-spacing:.12em; text-transform:uppercase;
+  padding: .3rem .8rem; width:fit-content; margin-bottom: 1.4rem;
+}
+.hero-left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 700;
+  line-height: .95; letter-spacing:-.02em; color: #fff;
+  margin-bottom: 1.5rem;
+}
+.hero-left h1 em { font-style: italic; color: #8CEBB4; }
+.hero-left p {
+  font-size: .95rem; font-weight: 300; line-height: 1.8;
+  color: rgba(255,255,255,.65); max-width: 420px;
+}
+
+.hero-right {
+  background: #f7f5ff;
+  padding: 5rem 5%;
+  display: flex; flex-direction: column; justify-content: center;
+  border-left: none;
+  position: relative;
+}
+.hero-right-label {
+  font-size: .68rem; font-weight: 600; letter-spacing:.2em; text-transform:uppercase;
+  color: #DD536C; margin-bottom: 1.2rem;
+}
+.hero-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-bottom: 2.5rem;
+}
+.hstat {
+  padding: 1.8rem 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(18,8,46,.07);
+}
+.hstat:nth-child(1) { background: #DD536C; }
+.hstat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 700; line-height:1;
+  margin-bottom: .3rem;
+}
+.hstat:nth-child(1) .hstat-n { color: #fff; }
+.hstat:nth-child(2) .hstat-n { color: #390CA3; }
+.hstat:nth-child(3) .hstat-n { color: #DD536C; }
+.hstat:nth-child(4) .hstat-n { color: #12082E; }
+.hstat-l {
+  font-size: .68rem; font-weight: 500; letter-spacing:.08em; text-transform:uppercase;
+}
+.hstat:nth-child(1) .hstat-l { color:rgba(255,255,255,.6); }
+.hstat-l { color: #888; }
+
+.hero-right-desc {
+  font-size: .88rem; font-weight: 300; line-height: 1.8; color: rgba(18,8,46,.5);
+  border-left: 3px solid #8CEBB4; padding-left: 1.1rem;
+}
+
+/* ── STRIP ── */
+.strip {
+  background: #12082E; padding: .75rem 0; overflow:hidden; white-space:nowrap;
+}
+.strip-inner {
+  display:inline-flex; gap:3rem; align-items:center;
+  animation: slide 22s linear infinite;
+}
+.strip-item {
+  font-size:.7rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase;
+  color:rgba(255,255,255,.4); flex-shrink:0;
+  display:flex; align-items:center; gap:3rem;
+}
+.strip-item::after { content:'◆'; color:#DD536C; font-size:.45rem; }
+@keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── OBJECTIF ── */
+.objectif {
+  padding: 5rem 5%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: start;
+  border-bottom: 1px solid rgba(18,8,46,.1);
+}
+.obj-label {
+  padding-top: .3rem;
+}
+.obj-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 700; line-height:1;
+  color: #DD536C; opacity:.15; margin-bottom: .5rem;
+}
+.obj-tag {
+  font-size: .68rem; font-weight: 700; letter-spacing:.2em; text-transform:uppercase;
+  color: #390CA3;
+}
+.obj-content {}
+.obj-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700;
+  line-height: 1.1; margin-bottom: 1.5rem;
+}
+.obj-content h2 em { font-style:italic; color:#DD536C; }
+.obj-content p {
+  font-size: .95rem; font-weight: 300; line-height: 1.85; color: rgba(18,8,46,.55);
+  margin-bottom: 1.2rem; max-width: 560px;
+}
+.obj-highlights {
+  display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap:wrap;
+}
+.ohighlight {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .8rem; font-weight: 500; color: #12082E;
+}
+.ohighlight-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+/* ── FONCTIONNALITÉS ── */
+.features {
+  padding: 5rem 5%;
+  border-bottom: 1px solid rgba(18,8,46,.1);
+}
+.features-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #12082E;
+  margin-bottom: 3rem;
+}
+.features-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700;
+}
+.features-header h2 em { font-style:italic; color:#DD536C; }
+.features-count {
+  font-size: .75rem; font-weight: 500; color: #888; letter-spacing:.06em;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  border-left: 1px solid rgba(18,8,46,.1);
+}
+.feat-card {
+  border-right: 1px solid rgba(18,8,46,.1);
+  border-bottom: 1px solid rgba(18,8,46,.1);
+  padding: 2rem 1.6rem;
+  transition: background .3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:3px;
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .35s;
+}
+.feat-card:nth-child(1)::after { background:#DD536C; }
+.feat-card:nth-child(2)::after { background:#390CA3; }
+.feat-card:nth-child(3)::after { background:#8CEBB4; }
+.feat-card:nth-child(4)::after { background:#DD536C; }
+.feat-card:hover { background:#fafafa; }
+.feat-card:hover::after { transform:scaleX(1); }
+
+.feat-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.feat-card:nth-child(1) .feat-icon { background:#DD536C22; }
+.feat-card:nth-child(2) .feat-icon { background:#390CA322; }
+.feat-card:nth-child(3) .feat-icon { background:#8CEBB444; }
+.feat-card:nth-child(4) .feat-icon { background:#DD536C22; }
+.feat-icon svg { width:20px; height:20px; }
+
+.feat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; margin-bottom: .6rem;
+}
+.feat-desc {
+  font-size: .8rem; font-weight: 300; line-height: 1.7; color: rgba(18,8,46,.5);
+}
+
+/* ── COMMENT ÇA MARCHE ── */
+.how {
+  padding: 5rem 5%;
+  background: #f7f5ff;
+  border-bottom: 1px solid rgba(18,8,46,.1);
+}
+.how-header {
+  margin-bottom: 3.5rem;
+}
+.how-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; margin-bottom:.6rem; }
+.how-header h2 {
+  font-family:'Playfair Display',serif;
+  font-size: 2rem; font-weight:700;
+}
+.how-header h2 em { font-style:italic; color:#390CA3; }
+
+.steps {
+  display: grid; grid-template-columns: repeat(3,1fr); gap:2px;
+}
+.step {
+  background: #fff; padding: 2.5rem 2rem;
+  position:relative; overflow:hidden;
+  border: 1px solid rgba(18,8,46,.06);
+}
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight:700; line-height:1;
+  color: #12082E; opacity:.05; margin-bottom: 1rem;
+}
+.step-bar { width:32px; height:3px; margin-bottom:1rem; }
+.step:nth-child(1) .step-bar { background:#DD536C; }
+.step:nth-child(2) .step-bar { background:#390CA3; }
+.step:nth-child(3) .step-bar { background:#8CEBB4; }
+.step-title {
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem; font-weight:700; margin-bottom:.7rem;
+}
+.step-desc {
+  font-size:.83rem; font-weight:300; line-height:1.75; color:rgba(18,8,46,.5);
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: #DD536C;
+  padding: 5rem 5%;
+  display: grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+  position:relative; overflow:hidden;
+}
+.cta-section::before {
+  content:'';
+  position:absolute; right:-150px; top:-150px;
+  width:500px; height:500px; border-radius:50%;
+  background:rgba(255,255,255,.05);
+  pointer-events:none;
+}
+.cta-left { position:relative; z-index:2; }
+.cta-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:1rem; }
+.cta-left h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3.5rem); font-weight:700; line-height:1; color:#fff; margin-bottom:1.2rem;
+}
+.cta-left h2 em { font-style:italic; color:#8CEBB4; }
+.cta-left p { font-size:.92rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,.7); }
+
+.cta-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; }
+.cta-form-group { display:flex; flex-direction:column; gap:.5rem; }
+.cta-form-group label { font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7); }
+.cta-input {
+  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:#fff;
+  padding:.85rem 1.1rem; font-size:.9rem; font-family:'Inter',sans-serif;
+  outline:none; transition:border-color .2s;
+  width:100%;
+}
+.cta-input::placeholder { color:rgba(255,255,255,.4); }
+.cta-input:focus { border-color:rgba(255,255,255,.7); }
+.cta-btn {
+  background:#12082E; color:#fff;
+  font-size:.88rem; font-weight:600;
+  padding:1rem 2rem; text-decoration:none;
+  display:inline-block; width:100%; text-align:center;
+  transition:background .2s;
+  cursor:pointer; border:none; font-family:'Inter',sans-serif;
+}
+.cta-btn:hover { background:#8CEBB4; color:#0a3d26; }
+.cta-note { font-size:.7rem; color:rgba(255,255,255,.4); text-align:center; }
+
+/* ── FOOTER ── */
+footer {
+  background: #12082E; color:rgba(255,255,255,.85);
+  padding: 4rem 5% 2rem;
+}
+.ft-top {
+  display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem;
+  padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:1.5rem;
+}
+.ft-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:.6rem; }
+.ft-logo span { color:#DD536C; }
+.ft-desc { font-size:.8rem; color:rgba(255,255,255,.35); line-height:1.7; margin-bottom:1.2rem; }
+.ft-badge {
+  display:inline-flex; align-items:center; gap:.4rem;
+  background:rgba(140,235,180,.1); border:1px solid rgba(140,235,180,.2);
+  padding:.3rem .7rem; font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#8CEBB4;
+}
+.ft-badge-dot { width:5px; height:5px; border-radius:50%; background:#8CEBB4; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.ft-head { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:1rem; }
+.ft-list { list-style:none; }
+.ft-list li { margin-bottom:.4rem; }
+.ft-list a { font-size:.8rem; color:rgba(255,255,255,.35); text-decoration:none; transition:color .2s; }
+.ft-list a:hover { color:#fff; }
+.ft-bottom { display:flex; justify-content:space-between; font-size:.7rem; color:rgba(255,255,255,.2); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(22px); transition:opacity .7s ease,transform .7s ease; }
+.rv.on { opacity:1; transform:none; }
+.rv2 { transition-delay:.1s; }
+.rv3 { transition-delay:.2s; }
+.rv4 { transition-delay:.3s; }
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .hero { grid-template-columns:1fr; }
+  .hero-right { padding-top:3rem; }
+  .hero-stats { display:none; }
+  .objectif { grid-template-columns:1fr; gap:2rem; }
+  .features-grid { grid-template-columns:1fr 1fr; }
+  .steps { grid-template-columns:1fr; }
+  .cta-section { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr 1fr; gap:2.5rem; }
+  .ft-bottom { flex-direction:column; gap:.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Expertise <span>Afrique</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Retour à l'accueil
+    </a>
+    <div class="nav-badge">ThinkTank</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-breadcrumb">Expertise Afrique · <span>Production</span></div>
+    <div class="hero-tag">Pilier 01 — Production</div>
+    <h1>Think<br><em>Tank</em></h1>
+    <p>Un espace stratégique dédié à la réflexion, l'analyse et la production d'idées pour le développement du continent africain.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-label">ThinkTank en chiffres</div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n" data-count="320">0</div>
+        <div class="hstat-l">Articles publiés</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" data-count="48">0</div>
+        <div class="hstat-l">Experts contributeurs</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" data-count="12">0</div>
+        <div class="hstat-l">Thématiques couvertes</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" data-count="54">0</div>
+        <div class="hstat-l">Pays représentés</div>
+      </div>
+    </div>
+    <p class="hero-right-desc">Le ThinkTank permet aux experts, chercheurs et professionnels de publier des analyses, partager leurs idées et contribuer aux grandes décisions stratégiques du continent.</p>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Publication d'articles</span>
+    <span class="strip-item">Débats & discussions</span>
+    <span class="strip-item">Collaboration entre experts</span>
+    <span class="strip-item">Recommandations stratégiques</span>
+    <span class="strip-item">54 pays couverts</span>
+    <span class="strip-item">Publication d'articles</span>
+    <span class="strip-item">Débats & discussions</span>
+    <span class="strip-item">Collaboration entre experts</span>
+    <span class="strip-item">Recommandations stratégiques</span>
+    <span class="strip-item">54 pays couverts</span>
+  </div>
+</div>
+
+<!-- OBJECTIF -->
+<section class="objectif">
+  <div class="obj-label rv">
+    <div class="obj-num">01</div>
+    <div class="obj-tag">Objectif</div>
+  </div>
+  <div class="obj-content rv rv2">
+    <h2>Produire des idées qui<br><em>transforment</em> l'Afrique</h2>
+    <p>Le ThinkTank est un laboratoire ouvert où les meilleurs esprits africains se réunissent pour analyser, débattre et proposer des solutions concrètes aux défis du continent. Chaque article, chaque étude publiée contribue à construire une base de connaissance souveraine et panafricaine.</p>
+    <p>Notre objectif n'est pas seulement d'analyser le présent, mais de dessiner les contours d'une Afrique qui pense et décide par elle-même.</p>
+    <div class="obj-highlights">
+      <div class="ohighlight">
+        <div class="ohighlight-dot" style="background:#DD536C"></div>
+        Analyses stratégiques
+      </div>
+      <div class="ohighlight">
+        <div class="ohighlight-dot" style="background:#390CA3"></div>
+        Recherche appliquée
+      </div>
+      <div class="ohighlight">
+        <div class="ohighlight-dot" style="background:#8CEBB4"></div>
+        Politiques publiques
+      </div>
+      <div class="ohighlight">
+        <div class="ohighlight-dot" style="background:#12082E"></div>
+        Vision long terme
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section class="features">
+  <div class="features-header rv">
+    <h2>Ce que vous pouvez <em>faire</em></h2>
+    <span class="features-count">04 fonctionnalités</span>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card rv">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M4 4h12M4 8h12M4 12h8" stroke="#DD536C" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="15" cy="14" r="3" stroke="#DD536C" stroke-width="1.5"/>
+          <path d="M13.5 14h3M15 12.5v3" stroke="#DD536C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feat-name">Publication d'articles</div>
+      <p class="feat-desc">Rédigez et publiez vos analyses, études de cas et prises de position sur les grandes questions africaines.</p>
+    </div>
+    <div class="feat-card rv rv2">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M4 6h12M4 10h12M4 14h8" stroke="#390CA3" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="15" r="2" fill="#390CA3" opacity=".2" stroke="#390CA3" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="feat-name">Débats & discussions</div>
+      <p class="feat-desc">Participez à des échanges structurés avec des experts de tout le continent sur des sujets stratégiques.</p>
+    </div>
+    <div class="feat-card rv rv3">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="2.5" stroke="#1a9162" stroke-width="1.4"/>
+          <circle cx="4" cy="6" r="2" stroke="#1a9162" stroke-width="1.2"/>
+          <circle cx="16" cy="6" r="2" stroke="#1a9162" stroke-width="1.2"/>
+          <circle cx="4" cy="14" r="2" stroke="#1a9162" stroke-width="1.2"/>
+          <circle cx="16" cy="14" r="2" stroke="#1a9162" stroke-width="1.2"/>
+          <path d="M6 7L8.5 9M13.5 7L11.5 9M6 13L8.5 11M13.5 13L11.5 11" stroke="#1a9162" stroke-width="1" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="feat-name">Collaboration d'experts</div>
+      <p class="feat-desc">Co-rédigez des rapports avec des chercheurs et professionnels de 54 pays africains.</p>
+    </div>
+    <div class="feat-card rv rv4">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M4 16L10 4L16 16" stroke="#DD536C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M7 12h6" stroke="#DD536C" stroke-width="1" opacity=".6"/>
+          <circle cx="10" cy="4" r="1.5" fill="#DD536C" opacity=".3" stroke="#DD536C" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="feat-name">Recommandations stratégiques</div>
+      <p class="feat-desc">Produisez des livrables concrets : mémos, rapports et feuilles de route à destination des décideurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT ÇA MARCHE -->
+<section class="how">
+  <div class="how-header rv">
+    <div class="how-label">Processus</div>
+    <h2>Comment ça <em>marche</em> ?</h2>
+  </div>
+  <div class="steps">
+    <div class="step rv">
+      <div class="step-num">01</div>
+      <div class="step-bar"></div>
+      <div class="step-title">Rejoindre & créer un profil</div>
+      <p class="step-desc">Inscrivez-vous sur la plateforme, renseignez votre expertise et vos domaines d'intérêt. Votre profil devient votre carte de visite intellectuelle sur le réseau.</p>
+    </div>
+    <div class="step rv rv2">
+      <div class="step-num">02</div>
+      <div class="step-bar"></div>
+      <div class="step-title">Contribuer & collaborer</div>
+      <p class="step-desc">Publiez vos analyses, rejoignez des groupes de travail thématiques et collaborez avec d'autres experts africains sur des sujets qui vous passionnent.</p>
+    </div>
+    <div class="step rv rv3">
+      <div class="step-num">03</div>
+      <div class="step-bar"></div>
+      <div class="step-title">Impacter & diffuser</div>
+      <p class="step-desc">Vos productions sont diffusées sur l'ensemble du réseau Expertise Afrique, relayées auprès des décideurs, institutions et partenaires du continent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="rejoindre">
+  <div class="cta-left rv">
+    <div class="cta-tag">Rejoindre le ThinkTank</div>
+    <h2>Participez à la construction de l'<em>avenir</em></h2>
+    <p>Votre expertise mérite d'être entendue. Rejoignez plus de 320 contributeurs qui façonnent déjà la pensée stratégique africaine.</p>
+  </div>
+  <div class="cta-right rv rv2">
+
+   
+    <button class="cta-btn">Rejoindre le ThinkTank →</button>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Expertise <span>Afrique</span></div>
+      <p class="ft-desc">L'intelligence collective africaine structurée en quatre piliers pour transformer le continent.</p>
+      
+    </div>
+    <div>
+      <div class="ft-head">Services</div>
+      <ul class="ft-list">
+        <li><a href="#">ThinkTank</a></li>
+        <li><a href="moodle.html">Moodle</a></li>
+        <li><a href="kalema.html">Réseau Kalema</a></li>
+        <li><a href="mentorat.html">Mentorat</a></li>
+      </ul>
+    </div>
+  
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Expertise Afrique — Tous droits réservés</span>
+  
+  </div>
+</footer>
+
+<script>
+// Counters
+function countUp(el, target, dur=1400) {
+  let s=null;
+  (function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1), e=1-Math.pow(1-p,3);
+    el.textContent=target>100?Math.floor(e*target).toLocaleString():Math.floor(e*target);
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=target>100?target.toLocaleString():target;
+  })(performance.now());
+}
+const cObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('[data-count]').forEach(el=>countUp(el,+el.dataset.count));cObs.disconnect();}});
+},{threshold:.3});
+const fc=document.querySelector('[data-count]');
+if(fc) cObs.observe(fc);
+
+// Reveal
+const rObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>rObs.observe(el));
+</script>
+</body>
+</html>

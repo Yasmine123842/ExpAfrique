@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moodle — Expertise Afrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:#fff; color:#12082E; overflow-x:hidden; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:#fff; border-bottom:2px solid #12082E;
+  display:flex; align-items:center; justify-content:space-between; padding:1.1rem 5%;
+}
+.logo { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:#12082E; text-decoration:none; }
+.logo span { color:#DD536C; }
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-back { display:flex; align-items:center; gap:.5rem; font-size:.82rem; font-weight:500; color:#666; text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:#390CA3; }
+.nav-back svg { width:16px; height:16px; }
+.nav-badge { background:#390CA3; color:#fff; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .8rem; }
+
+/* ── HERO ── */
+.hero { margin-top:65px; min-height:560px; }
+
+.hero-left {
+  background: #390CA3;
+  padding: 5rem 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  min-height: 560px;
+  max-width: 100%;
+}
+.hero-left::before {
+  content:'M'; position:absolute; right:-.06em; top:-.1em;
+  font-family:'Playfair Display',serif; font-size:28rem; font-weight:700; line-height:1;
+  color:rgba(255,255,255,.04); pointer-events:none;
+}
+
+/* Decorative */
+.hero-deco {
+  position:absolute; top:3rem; right:3rem;
+  width:140px; height:140px; border-radius:50%;
+  border:1px solid rgba(140,235,180,.2);
+}
+.hero-deco::before {
+  content:''; position:absolute; top:14px; left:14px; right:14px; bottom:14px;
+  border-radius:50%; border:1px solid rgba(221,83,108,.25);
+}
+.hero-deco::after {
+  content:''; position:absolute; top:32px; left:32px; right:32px; bottom:32px;
+  border-radius:50%; background:rgba(140,235,180,.15);
+}
+
+.hero-breadcrumb {
+  position:absolute; top:2.5rem; left:5%;
+  display:flex; align-items:center; gap:.5rem;
+  font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.hero-breadcrumb span { color:#8CEBB4; }
+
+.hero-tag {
+  background:#DD536C; color:#fff;
+  font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  padding:.3rem .8rem; width:fit-content; margin-bottom:1.4rem;
+}
+
+.hero-title-row {
+  display:flex; align-items:center; gap:2.5rem;
+  flex-wrap:wrap; margin-bottom:1.5rem;
+}
+.hero-left h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.5rem,7vw,7rem); font-weight:700;
+  line-height:.95; letter-spacing:-.02em; color:#fff; margin-bottom:0;
+}
+.hero-left h1 em { font-style:italic; color:#8CEBB4; }
+
+.btn-hero-main {
+  background:#8CEBB4; color:#0a3d26;
+  font-size:.88rem; font-weight:600; padding:.95rem 2rem;
+  text-decoration:none; display:inline-block; flex-shrink:0; white-space:nowrap;
+  transition:background .25s, transform .25s;
+}
+.btn-hero-main:hover { background:#DD536C; color:#fff; transform:translateY(-2px); }
+
+.hero-left p {
+  font-size:.95rem; font-weight:300; line-height:1.8;
+  color:rgba(255,255,255,.6); max-width:520px;
+}
+
+/* ── STRIP ── */
+.strip { background:#12082E; padding:.75rem 0; overflow:hidden; white-space:nowrap; }
+.strip-inner { display:inline-flex; gap:3rem; align-items:center; animation:slide 22s linear infinite; }
+.strip-item { font-size:.7rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.4); flex-shrink:0; display:flex; align-items:center; gap:3rem; }
+.strip-item::after { content:'◆'; color:#390CA3; font-size:.45rem; }
+@keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── INTRO ── */
+.intro {
+  padding:5rem 5%; display:grid; grid-template-columns:1fr 2fr; gap:6rem; align-items:start;
+  border-bottom:1px solid rgba(18,8,46,.1);
+}
+.intro-label { padding-top:.2rem; }
+.intro-num { font-family:'Playfair Display',serif; font-size:5rem; font-weight:700; line-height:1; color:#390CA3; opacity:.15; margin-bottom:.5rem; }
+.intro-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; }
+.intro-content h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.8rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; }
+.intro-content h2 em { font-style:italic; color:#390CA3; }
+.intro-content p { font-size:.95rem; font-weight:300; line-height:1.85; color:rgba(18,8,46,.55); margin-bottom:1.2rem; max-width:560px; }
+.intro-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.8rem; }
+.itag { font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:.32rem .85rem; border:1px solid rgba(18,8,46,.12); color:rgba(18,8,46,.5); transition:all .2s; cursor:default; }
+.itag:hover { background:#390CA3; color:#fff; border-color:#390CA3; }
+
+/* ── STATS ── */
+.stats {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  border-top:2px solid #12082E; border-bottom:1px solid rgba(18,8,46,.1);
+}
+.stat-box { padding:2.5rem 2rem; border-right:1px solid rgba(18,8,46,.08); }
+.stat-box:last-child { border-right:none; }
+.stat-n { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; line-height:1; margin-bottom:.3rem; }
+.stat-box:nth-child(1) .stat-n { color:#390CA3; }
+.stat-box:nth-child(2) .stat-n { color:#DD536C; }
+.stat-box:nth-child(3) .stat-n { color:#1a9162; }
+.stat-box:nth-child(4) .stat-n { color:#390CA3; }
+.stat-l { font-size:.72rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:#888; }
+
+/* ── FORMATIONS ── */
+.formations { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.section-head { display:flex; align-items:baseline; justify-content:space-between; padding-bottom:1.4rem; border-bottom:2px solid #12082E; margin-bottom:3rem; }
+.section-head h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.section-head h2 em { font-style:italic; color:#DD536C; }
+.section-count { font-size:.75rem; font-weight:500; color:#888; letter-spacing:.06em; }
+
+.form-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+
+.form-card {
+  border:1px solid rgba(18,8,46,.08); overflow:hidden;
+  transition:border-color .3s, transform .3s; cursor:pointer;
+}
+.form-card:hover { border-color:#390CA3; transform:translateY(-4px); }
+
+.form-card-top {
+  height:140px; position:relative;
+  display:flex; align-items:flex-end; padding:1.2rem;
+}
+.form-card:nth-child(1) .form-card-top { background:#390CA3; }
+.form-card:nth-child(2) .form-card-top { background:#12082E; }
+.form-card:nth-child(3) .form-card-top { background:#DD536C; }
+.form-card:nth-child(4) .form-card-top { background:#1a9162; }
+.form-card:nth-child(5) .form-card-top { background:#390CA3; }
+.form-card:nth-child(6) .form-card-top { background:#12082E; }
+
+.form-level {
+  font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  padding:.25rem .7rem; background:rgba(255,255,255,.15); color:rgba(255,255,255,.9);
+}
+.form-card-body { padding:1.5rem; }
+.form-cat { font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#390CA3; margin-bottom:.4rem; }
+.form-card:nth-child(2) .form-cat { color:#DD536C; }
+.form-card:nth-child(3) .form-cat { color:#1a9162; }
+.form-card:nth-child(4) .form-cat { color:#390CA3; }
+.form-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; line-height:1.2; margin-bottom:.6rem; }
+.form-desc { font-size:.8rem; font-weight:300; line-height:1.6; color:rgba(18,8,46,.5); margin-bottom:1.2rem; }
+.form-meta { display:flex; align-items:center; justify-content:space-between; }
+.form-duration { font-size:.7rem; font-weight:500; color:#888; display:flex; align-items:center; gap:.35rem; }
+.form-duration::before { content:''; width:6px; height:6px; border-radius:50%; background:#8CEBB4; }
+.form-link { font-size:.75rem; font-weight:600; color:#390CA3; text-decoration:none; transition:color .2s; }
+.form-link:hover { color:#DD536C; }
+
+/* ── FONCTIONNALITÉS ── */
+.features { padding:5rem 5%; background:#f7f5ff; border-bottom:1px solid rgba(18,8,46,.1); }
+.feat-header { margin-bottom:3rem; }
+.feat-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#390CA3; margin-bottom:.6rem; }
+.feat-header h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.feat-header h2 em { font-style:italic; color:#DD536C; }
+
+.feat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-left:1px solid rgba(18,8,46,.08); }
+.feat-card {
+  border-right:1px solid rgba(18,8,46,.08);
+  padding:2rem 1.6rem; transition:background .3s; cursor:default;
+  position:relative; overflow:hidden;
+}
+.feat-card:hover { background:#fff; }
+.feat-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  transform:scaleX(0); transform-origin:left; transition:transform .35s;
+}
+.feat-card:nth-child(1)::after { background:#390CA3; }
+.feat-card:nth-child(2)::after { background:#DD536C; }
+.feat-card:nth-child(3)::after { background:#8CEBB4; }
+.feat-card:nth-child(4)::after { background:#390CA3; }
+.feat-card:hover::after { transform:scaleX(1); }
+
+.feat-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem; }
+.feat-card:nth-child(1) .feat-icon { background:#390CA318; }
+.feat-card:nth-child(2) .feat-icon { background:#DD536C18; }
+.feat-card:nth-child(3) .feat-icon { background:#8CEBB440; }
+.feat-card:nth-child(4) .feat-icon { background:#390CA318; }
+.feat-icon svg { width:20px; height:20px; }
+.feat-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:.5rem; }
+.feat-desc { font-size:.8rem; font-weight:300; line-height:1.7; color:rgba(18,8,46,.5); }
+
+/* ── PROCESS ── */
+.process { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.process-header { margin-bottom:3.5rem; }
+.process-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; margin-bottom:.6rem; }
+.process-header h2 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; }
+.process-header h2 em { font-style:italic; color:#390CA3; }
+.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-left:1px solid rgba(18,8,46,.1); }
+.pstep { border-right:1px solid rgba(18,8,46,.1); padding:2.2rem 1.8rem; }
+.pstep-num { font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:700; line-height:1; opacity:.07; margin-bottom:1rem; }
+.pstep-bar { width:28px; height:3px; margin-bottom:1rem; }
+.pstep:nth-child(1) .pstep-bar { background:#390CA3; }
+.pstep:nth-child(2) .pstep-bar { background:#DD536C; }
+.pstep:nth-child(3) .pstep-bar { background:#8CEBB4; }
+.pstep:nth-child(4) .pstep-bar { background:#390CA3; }
+.pstep-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:.6rem; }
+.pstep-desc { font-size:.8rem; font-weight:300; line-height:1.7; color:rgba(18,8,46,.5); }
+
+/* ── TEMOIGNAGE ── */
+.temoignage { background:#12082E; padding:5rem 5%; position:relative; overflow:hidden; }
+.temoignage::before {
+  content:'«'; position:absolute; left:3%; top:-2rem;
+  font-family:'Playfair Display',serif; font-size:24rem; font-weight:700; line-height:1;
+  color:rgba(255,255,255,.03); pointer-events:none;
+}
+.temo-inner { max-width:760px; margin:0 auto; text-align:center; position:relative; z-index:2; }
+.temo-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#390CA3; margin-bottom:2rem; }
+.temo-quote { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.8vw,2.2rem); font-style:italic; font-weight:400; line-height:1.5; color:#fff; margin-bottom:2rem; }
+.temo-author { display:flex; align-items:center; justify-content:center; gap:1rem; }
+.temo-avatar { width:48px; height:48px; border-radius:50%; background:#390CA3; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:700; color:#fff; font-size:1rem; }
+.temo-info-name { font-size:.88rem; font-weight:600; color:#fff; margin-bottom:.15rem; }
+.temo-info-role { font-size:.75rem; color:rgba(255,255,255,.4); }
+
+/* ── CTA ── */
+.cta-section {
+  background:#390CA3; padding:5rem 5%;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+  position:relative; overflow:hidden;
+}
+.cta-section::before { content:''; position:absolute; right:-150px; top:-150px; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,.04); pointer-events:none; }
+.cta-left { position:relative; z-index:2; }
+.cta-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:1rem; }
+.cta-left h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:700; line-height:1.05; color:#fff; margin-bottom:1.2rem; }
+.cta-left h2 em { font-style:italic; color:#8CEBB4; }
+.cta-left p { font-size:.92rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,.6); }
+.cta-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; }
+.cta-form-group { display:flex; flex-direction:column; gap:.5rem; }
+.cta-form-group label { font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+.cta-input { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; padding:.85rem 1.1rem; font-size:.9rem; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s; width:100%; }
+.cta-input::placeholder { color:rgba(255,255,255,.35); }
+.cta-input:focus { border-color:rgba(255,255,255,.6); }
+.cta-select { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.8); padding:.85rem 1.1rem; font-size:.9rem; font-family:'Inter',sans-serif; outline:none; width:100%; cursor:pointer; }
+.cta-select option { background:#390CA3; color:#fff; }
+.cta-btn { background:#8CEBB4; color:#0a3d26; font-size:.88rem; font-weight:700; padding:1rem 2rem; width:100%; text-align:center; border:none; font-family:'Inter',sans-serif; cursor:pointer; transition:background .2s; }
+.cta-btn:hover { background:#DD536C; color:#fff; }
+.cta-note { font-size:.7rem; color:rgba(255,255,255,.35); text-align:center; }
+
+/* ── FOOTER ── */
+footer { background:#12082E; color:rgba(255,255,255,.85); padding:4rem 5% 2rem; }
+.ft-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:1.5rem; }
+.ft-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:.6rem; }
+.ft-logo span { color:#DD536C; }
+.ft-desc { font-size:.8rem; color:rgba(255,255,255,.35); line-height:1.7; margin-bottom:1.2rem; }
+.ft-badge { display:inline-flex; align-items:center; gap:.4rem; background:rgba(57,12,163,.3); border:1px solid rgba(57,12,163,.5); padding:.3rem .7rem; font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#a78bfa; }
+.ft-badge-dot { width:5px; height:5px; border-radius:50%; background:#390CA3; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.ft-head { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:1rem; }
+.ft-list { list-style:none; }
+.ft-list li { margin-bottom:.4rem; }
+.ft-list a { font-size:.8rem; color:rgba(255,255,255,.35); text-decoration:none; transition:color .2s; }
+.ft-list a:hover { color:#fff; }
+.ft-bottom { display:flex; justify-content:space-between; font-size:.7rem; color:rgba(255,255,255,.2); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(22px); transition:opacity .7s ease,transform .7s ease; }
+.rv.on { opacity:1; transform:none; }
+.rv2 { transition-delay:.1s; } .rv3 { transition-delay:.2s; } .rv4 { transition-delay:.3s; }
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .hero-title-row { gap:1.5rem; }
+  .hero-left h1 { font-size:3rem; }
+  .stats { grid-template-columns:1fr 1fr; }
+  .intro { grid-template-columns:1fr; gap:2rem; }
+  .form-grid { grid-template-columns:1fr 1fr; }
+  .feat-grid { grid-template-columns:1fr 1fr; }
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .cta-section { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr 1fr; gap:2.5rem; }
+  .ft-bottom { flex-direction:column; gap:.5rem; }
+  .nav-back span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Expertise <span>Afrique</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Retour à l'accueil</span>
+    </a>
+    <div class="nav-badge">Moodle</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-deco"></div>
+    <div class="hero-breadcrumb">Expertise Afrique · <span>Savoir</span></div>
+    <div class="hero-tag">Pilier 02 — Savoir</div>
+    <div class="hero-title-row">
+      <h1>Moo<em>dle</em></h1>
+      <a href="#inscription" class="btn-hero-main">Commencer à apprendre →</a>
+    </div>
+    <p>Plateforme d'apprentissage en ligne certifiante, conçue pour les réalités africaines. Des formations structurées, des formateurs locaux, accessibles depuis n'importe où sur le continent.</p>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Formations certifiantes</span>
+    <span class="strip-item">Formateurs africains</span>
+    <span class="strip-item">Parcours sur mesure</span>
+    <span class="strip-item">54 pays couverts</span>
+    <span class="strip-item">Formations certifiantes</span>
+    <span class="strip-item">Formateurs africains</span>
+    <span class="strip-item">Parcours sur mesure</span>
+    <span class="strip-item">54 pays couverts</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-box">
+    <div class="stat-n" data-count="240">0</div>
+    <div class="stat-l">Cours disponibles</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-n" data-count="85">0</div>
+    <div class="stat-l">Formateurs certifiés</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-n" data-count="4800">0</div>
+    <div class="stat-l">Apprenants actifs</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-n" data-count="54">0</div>
+    <div class="stat-l">Pays couverts</div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-label rv">
+    <div class="intro-num">02</div>
+    <div class="intro-tag">Notre approche</div>
+  </div>
+  <div class="intro-content rv rv2">
+    <h2>Apprendre à son rythme,<br>progresser avec <em>méthode</em></h2>
+    <p>Moodle chez Expertise Afrique n'est pas une simple plateforme de cours en ligne — c'est un environnement d'apprentissage complet, pensé pour les contraintes et les ambitions du continent africain : connectivité variable, langues multiples, contextes professionnels diversifiés.</p>
+    <p>Chaque parcours est construit par des formateurs africains qui comprennent vos réalités. Chaque certification est reconnue par des employeurs et institutions partenaires à travers tout le continent.</p>
+    <div class="intro-tags">
+      <span class="itag">E-learning</span>
+      <span class="itag">Certification</span>
+      <span class="itag">Présentiel hybride</span>
+    
+    </div>
+  </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section class="features">
+  <div class="feat-header rv">
+    <div class="feat-label">Pourquoi Moodle</div>
+    <h2>Une plateforme pensée pour <em>l'Afrique</em></h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card rv">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="4" width="16" height="12" rx="2" stroke="#390CA3" stroke-width="1.4"/>
+          <path d="M2 8h16" stroke="#390CA3" stroke-width="1"/>
+          <path d="M7 8v8" stroke="#390CA3" stroke-width="1"/>
+          <rect x="9" y="10" width="6" height="1.5" rx=".75" fill="#390CA3" opacity=".5"/>
+          <rect x="9" y="13" width="4" height="1.5" rx=".75" fill="#390CA3" opacity=".3"/>
+        </svg>
+      </div>
+      <div class="feat-name">Parcours certifiants</div>
+      <p class="feat-desc">Chaque formation aboutit à une certification reconnue par des employeurs et institutions partenaires en Afrique.</p>
+    </div>
+
+    <div class="feat-card rv rv3">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="7" stroke="#1a9162" stroke-width="1.4"/>
+          <path d="M7 10l2 2 4-4" stroke="#1a9162" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feat-name">Formateurs africains</div>
+      <p class="feat-desc">Des experts du continent qui connaissent vos réalités économiques, culturelles et professionnelles.</p>
+    </div>
+    <div class="feat-card rv rv4">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="6" r="3" stroke="#390CA3" stroke-width="1.4"/>
+          <circle cx="4" cy="14" r="2.5" stroke="#390CA3" stroke-width="1.2"/>
+          <circle cx="16" cy="14" r="2.5" stroke="#390CA3" stroke-width="1.2"/>
+          <path d="M7 12.5C7.5 11 8.5 10 10 10C11.5 10 12.5 11 13 12.5" stroke="#390CA3" stroke-width="1" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="feat-name">Communauté apprenante</div>
+      <p class="feat-desc">Forums, groupes de travail et sessions live pour apprendre avec et des autres apprenants à travers le continent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header rv">
+    <div class="process-label">Comment ça marche</div>
+    <h2>De l'inscription à la <em>certification</em></h2>
+  </div>
+  <div class="process-steps">
+    <div class="pstep rv">
+      <div class="pstep-num">01</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Choisir sa formation</div>
+      <p class="pstep-desc">Parcourez le catalogue et choisissez la formation qui correspond à vos objectifs.</p>
+    </div>
+    <div class="pstep rv rv2">
+      <div class="pstep-num">02</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Accéder</div>
+      <p class="pstep-desc">Accéder à la formation et aux modules, vidéos et ressources.</p>
+    </div>
+    <div class="pstep rv rv3">
+      <div class="pstep-num">03</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Apprendre & pratiquer</div>
+      <p class="pstep-desc">Suivez les modules à votre rythme, participez aux exercices et forums avec votre formateur.</p>
+    </div>
+    <div class="pstep rv rv4">
+      <div class="pstep-num">04</div>
+      <div class="pstep-bar"></div>
+      <div class="pstep-title">Obtenir sa certification</div>
+      <p class="pstep-desc">Réussissez l'évaluation finale et obtenez votre certification.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section" id="inscription">
+  <div class="cta-left rv">
+    <div class="cta-tag">Rejoindre Moodle</div>
+    <h2>Commencez votre parcours d'apprentissage <em>aujourd'hui</em></h2>
+    <p>Certification reconnue. Formateurs africains. Apprenez à votre rythme, depuis n'importe où.</p>
+  </div>
+  <div class="cta-right rv rv2">
+  
+
+<a href="https://expertiseafrique.com/" class="cta-btn" target="_blank" rel="noopener noreferrer">
+  Apprendre →
+</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Expertise <span>Afrique</span></div>
+      <p class="ft-desc">L'intelligence collective africaine structurée en quatre piliers pour transformer le continent.</p>
+    
+    </div>
+    <div>
+      <div class="ft-head">Services</div>
+      <ul class="ft-list">
+        <li><a href="thinktank.html">ThinkTank</a></li>
+        <li><a href="#">Moodle</a></li>
+        <li><a href="kalema.html">Réseau Kalema</a></li>
+        <li><a href="mentorat.html">Mentorat</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Expertise Afrique — Tous droits réservés</span>
+
+  </div>
+</footer>
+
+<script>
+// Counters
+function countUp(el, target, dur=1400) {
+  let s=null;
+  (function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1), e=1-Math.pow(1-p,3);
+    el.textContent=target>100?Math.floor(e*target).toLocaleString():Math.floor(e*target);
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=target>100?target.toLocaleString():target;
+  })(performance.now());
+}
+const cObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('[data-count]').forEach(el=>countUp(el,+el.dataset.count));cObs.disconnect();}});
+},{threshold:.3});
+const fc=document.querySelector('[data-count]');
+if(fc) cObs.observe(fc.parentElement);
+
+// Reveal
+const rObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>rObs.observe(el));
+</script>
+</body>
+</html>

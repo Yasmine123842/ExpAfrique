@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réseau Kalema — Expertise Afrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:#fff; color:#12082E; overflow-x:hidden; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:#fff; border-bottom:2px solid #12082E;
+  display:flex; align-items:center; justify-content:space-between; padding:1.1rem 5%;
+}
+.logo { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:#12082E; text-decoration:none; }
+.logo span { color:#DD536C; }
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-back { display:flex; align-items:center; gap:.5rem; font-size:.82rem; font-weight:500; color:#666; text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:#1a9162; }
+.nav-back svg { width:16px; height:16px; }
+.nav-badge { background:#8CEBB4; color:#0a3d26; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .8rem; }
+
+/* ── HERO ── */
+/* ── HERO ── */
+.hero {
+  margin-top: 65px;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1fr 380px; /* ← hero à gauche, stats à droite */
+}
+
+.hero-left {
+  background: #1a9162;
+  padding: 5rem 5%;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; overflow: hidden;
+  min-height: 560px;
+}
+
+/* Stats à droite du hero */
+.hero-stats {
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-left: 2px solid #12082E;
+}
+
+.stat-box {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(18,8,46,.08);
+  border-bottom: 1px solid rgba(18,8,46,.08);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.stat-box:nth-child(2),
+.stat-box:nth-child(4) { border-right: none; }
+
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 700; line-height: 1; margin-bottom: .3rem;
+}
+.stat-box:nth-child(1) .stat-n { color: #1a9162; }
+.stat-box:nth-child(2) .stat-n { color: #DD536C; }
+.stat-box:nth-child(3) .stat-n { color: #390CA3; }
+.stat-box:nth-child(4) .stat-n { color: #1a9162; }
+.stat-l {
+  font-size: .68rem; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: #888;
+}
+
+/* Mobile */
+@media(max-width:860px){
+  .hero { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; border-left: none; border-top: 2px solid #12082E; }
+}
+.hero-left::before {
+  content:'K'; position:absolute; right:-.06em; top:-.1em;
+  font-family:'Playfair Display',serif; font-size:28rem; font-weight:700; line-height:1;
+  color:rgba(255,255,255,.04); pointer-events:none;
+}
+
+/* Network dots decoration */
+.hero-net {
+  position:absolute; top:0; right:0; bottom:0; left:0; pointer-events:none;
+  overflow:hidden;
+}
+.net-dot {
+  position:absolute; width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.2);
+}
+.net-line {
+  position:absolute; background:rgba(255,255,255,.06); height:1px; transform-origin:left center;
+}
+
+.hero-deco {
+  position:absolute; top:3rem; right:3rem;
+  width:130px; height:130px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+}
+.hero-deco::before {
+  content:''; position:absolute; top:14px; left:14px; right:14px; bottom:14px;
+  border-radius:50%; border:1px solid rgba(221,83,108,.2);
+}
+.hero-deco::after {
+  content:''; position:absolute; top:30px; left:30px; right:30px; bottom:30px;
+  border-radius:50%; background:rgba(57,12,163,.2);
+}
+
+.hero-breadcrumb {
+  position:absolute; top:2.5rem; left:5%;
+  display:flex; align-items:center; gap:.5rem;
+  font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+.hero-breadcrumb span { color:#8CEBB4; }
+.hero-tag { background:#DD536C; color:#fff; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:.3rem .8rem; width:fit-content; margin-bottom:1.4rem; }
+
+.hero-title-row { display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+.hero-left h1 { font-family:'Playfair Display',serif; font-size:clamp(3.5rem,7vw,7rem); font-weight:700; line-height:.95; letter-spacing:-.02em; color:#fff; margin-bottom:0; }
+.hero-left h1 em { font-style:italic; color:#8CEBB4; }
+
+.btn-hero-main { background:#fff; color:#1a9162; font-size:.88rem; font-weight:700; padding:.95rem 2rem; text-decoration:none; display:inline-block; flex-shrink:0; white-space:nowrap; transition:background .25s, transform .25s, color .25s; }
+.btn-hero-main:hover { background:#8CEBB4; color:#0a3d26; transform:translateY(-2px); }
+
+.hero-left p { font-size:.95rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,.65); max-width:520px; }
+
+/* ── STRIP ── */
+.strip { background:#12082E; padding:.75rem 0; overflow:hidden; white-space:nowrap; }
+.strip-inner { display:inline-flex; gap:3rem; align-items:center; animation:slide 22s linear infinite; }
+.strip-item { font-size:.7rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.4); flex-shrink:0; display:flex; align-items:center; gap:3rem; }
+.strip-item::after { content:'◆'; color:#8CEBB4; font-size:.45rem; }
+@keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── STATS ── */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:2px solid #12082E; border-bottom:1px solid rgba(18,8,46,.1); }
+.stat-box { padding:2.5rem 2rem; border-right:1px solid rgba(18,8,46,.08); }
+.stat-box:last-child { border-right:none; }
+.stat-n { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; line-height:1; margin-bottom:.3rem; }
+.stat-box:nth-child(1) .stat-n { color:#1a9162; }
+.stat-box:nth-child(2) .stat-n { color:#DD536C; }
+.stat-box:nth-child(3) .stat-n { color:#390CA3; }
+.stat-box:nth-child(4) .stat-n { color:#1a9162; }
+.stat-l { font-size:.72rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:#888; }
+
+/* ── INTRO ── */
+.intro { padding:5rem 5%; display:grid; grid-template-columns:1fr 2fr; gap:6rem; align-items:start; border-bottom:1px solid rgba(18,8,46,.1); }
+.intro-label { padding-top:.2rem; }
+.intro-num { font-family:'Playfair Display',serif; font-size:5rem; font-weight:700; line-height:1; color:#1a9162; opacity:.2; margin-bottom:.5rem; }
+.intro-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; }
+.intro-content h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.8rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem; }
+.intro-content h2 em { font-style:italic; color:#1a9162; }
+.intro-content p { font-size:.95rem; font-weight:300; line-height:1.85; color:rgba(18,8,46,.55); margin-bottom:1.2rem; max-width:560px; }
+.intro-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.8rem; }
+.itag { font-size:.7rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; padding:.32rem .85rem; border:1px solid rgba(18,8,46,.12); color:rgba(18,8,46,.5); transition:all .2s; cursor:default; }
+.itag:hover { background:#1a9162; color:#fff; border-color:#1a9162; }
+
+/* ── MEMBRES (profils) ── */
+.membres { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.section-head { display:flex; align-items:baseline; justify-content:space-between; padding-bottom:1.4rem; border-bottom:2px solid #12082E; margin-bottom:3rem; }
+.section-head h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.section-head h2 em { font-style:italic; color:#DD536C; }
+.section-sub { font-size:.75rem; font-weight:500; color:#888; letter-spacing:.06em; }
+
+.membres-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+.membre-card { border:1px solid rgba(18,8,46,.08); padding:1.8rem 1.5rem; transition:border-color .3s, transform .3s; cursor:pointer; }
+.membre-card:hover { border-color:#1a9162; transform:translateY(-4px); }
+
+.mc-top { display:flex; align-items:center; gap:.9rem; margin-bottom:1.2rem; }
+.mc-avatar { width:48px; height:48px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:#fff; }
+.mc-name { font-size:.88rem; font-weight:600; margin-bottom:.15rem; }
+.mc-country { font-size:.72rem; color:rgba(18,8,46,.4); }
+.mc-domain { display:inline-block; font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.22rem .65rem; border-radius:20px; margin-bottom:.8rem; }
+.mc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+.mc-tag { font-size:.62rem; font-weight:500; padding:.18rem .55rem; background:rgba(18,8,46,.04); color:rgba(18,8,46,.45); border-radius:4px; }
+.mc-connect { display:block; margin-top:1.1rem; text-align:center; font-size:.75rem; font-weight:600; padding:.6rem; text-decoration:none; border:1px solid rgba(18,8,46,.1); color:rgba(18,8,46,.5); transition:all .2s; }
+.mc-connect:hover { background:#1a9162; color:#fff; border-color:#1a9162; }
+
+/* ── FONCTIONNALITÉS ── */
+.features { padding:5rem 5%; background:#f7f5ff; border-bottom:1px solid rgba(18,8,46,.1); }
+.feat-header { margin-bottom:3rem; }
+.feat-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#1a9162; margin-bottom:.6rem; }
+.feat-header h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.feat-header h2 em { font-style:italic; color:#DD536C; }
+
+.feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-left:1px solid rgba(18,8,46,.08); }
+.feat-card { border-right:1px solid rgba(18,8,46,.08); border-bottom:1px solid rgba(18,8,46,.08); padding:2.2rem 2rem; transition:background .3s; cursor:default; position:relative; overflow:hidden; }
+.feat-card:hover { background:#fff; }
+.feat-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; transform:scaleX(0); transform-origin:left; transition:transform .35s; }
+.feat-card:nth-child(1)::after { background:#1a9162; }
+.feat-card:nth-child(2)::after { background:#DD536C; }
+.feat-card:nth-child(3)::after { background:#390CA3; }
+.feat-card:nth-child(4)::after { background:#DD536C; }
+.feat-card:nth-child(5)::after { background:#1a9162; }
+.feat-card:nth-child(6)::after { background:#390CA3; }
+.feat-card:hover::after { transform:scaleX(1); }
+
+.feat-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem; }
+.feat-card:nth-child(1) .feat-icon { background:rgba(26,145,98,.12); }
+.feat-card:nth-child(2) .feat-icon { background:#DD536C18; }
+.feat-card:nth-child(3) .feat-icon { background:#390CA318; }
+.feat-card:nth-child(4) .feat-icon { background:#DD536C18; }
+.feat-card:nth-child(5) .feat-icon { background:rgba(26,145,98,.12); }
+.feat-card:nth-child(6) .feat-icon { background:#390CA318; }
+.feat-icon svg { width:20px; height:20px; }
+.feat-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:.5rem; }
+.feat-desc { font-size:.8rem; font-weight:300; line-height:1.7; color:rgba(18,8,46,.5); }
+
+/* ── COMMUNAUTÉS ── */
+.communautes { padding:5rem 5%; border-bottom:1px solid rgba(18,8,46,.1); }
+.comm-header { margin-bottom:3rem; }
+.comm-label { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#DD536C; margin-bottom:.6rem; }
+.comm-header h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; }
+.comm-header h2 em { font-style:italic; color:#1a9162; }
+
+.comm-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.comm-card { padding:2rem; border:1px solid rgba(18,8,46,.07); transition:background .3s, border-color .3s; cursor:pointer; position:relative; overflow:hidden; }
+.comm-card:hover { background:#f7f5ff; border-color:#1a9162; }
+.comm-bar { width:28px; height:3px; margin-bottom:1.2rem; }
+.comm-card:nth-child(1) .comm-bar { background:#1a9162; }
+.comm-card:nth-child(2) .comm-bar { background:#DD536C; }
+.comm-card:nth-child(3) .comm-bar { background:#390CA3; }
+.comm-card:nth-child(4) .comm-bar { background:#DD536C; }
+.comm-card:nth-child(5) .comm-bar { background:#1a9162; }
+.comm-card:nth-child(6) .comm-bar { background:#390CA3; }
+.comm-name { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:.5rem; }
+.comm-desc { font-size:.8rem; font-weight:300; line-height:1.65; color:rgba(18,8,46,.5); margin-bottom:1rem; }
+.comm-meta { display:flex; align-items:center; justify-content:space-between; }
+.comm-count { font-size:.7rem; font-weight:600; color:#1a9162; }
+.comm-join { font-size:.72rem; font-weight:600; color:rgba(18,8,46,.4); text-decoration:none; transition:color .2s; }
+.comm-join:hover { color:#1a9162; }
+
+/* ── TEMOIGNAGE ── */
+.temoignage { background:#1a9162; padding:5rem 5%; position:relative; overflow:hidden; }
+.temoignage::before { content:'«'; position:absolute; left:3%; top:-2rem; font-family:'Playfair Display',serif; font-size:24rem; font-weight:700; line-height:1; color:rgba(255,255,255,.04); pointer-events:none; }
+.temo-inner { max-width:760px; margin:0 auto; text-align:center; position:relative; z-index:2; }
+.temo-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:2rem; }
+.temo-quote { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.8vw,2.2rem); font-style:italic; font-weight:400; line-height:1.5; color:#fff; margin-bottom:2rem; }
+.temo-author { display:flex; align-items:center; justify-content:center; gap:1rem; }
+.temo-avatar { width:48px; height:48px; border-radius:50%; background:#DD536C; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:700; color:#fff; font-size:1rem; }
+.temo-info-name { font-size:.88rem; font-weight:600; color:#fff; margin-bottom:.15rem; }
+.temo-info-role { font-size:.75rem; color:rgba(255,255,255,.5); }
+
+/* ── CTA ── */
+.cta-section { background:#DD536C; padding:5rem 5%; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; position:relative; overflow:hidden; }
+.cta-section::before { content:''; position:absolute; right:-150px; top:-150px; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,.05); pointer-events:none; }
+.cta-left { position:relative; z-index:2; }
+.cta-tag { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:1rem; }
+.cta-left h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:700; line-height:1.05; color:#fff; margin-bottom:1.2rem; }
+.cta-left h2 em { font-style:italic; color:#8CEBB4; }
+.cta-left p { font-size:.92rem; font-weight:300; line-height:1.8; color:rgba(255,255,255,.7); }
+
+.cta-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:1rem; }
+.cta-form-group { display:flex; flex-direction:column; gap:.5rem; }
+.cta-form-group label { font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7); }
+.cta-input { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:#fff; padding:.85rem 1.1rem; font-size:.9rem; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s; width:100%; }
+.cta-input::placeholder { color:rgba(255,255,255,.4); }
+.cta-input:focus { border-color:rgba(255,255,255,.7); }
+.cta-select { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8); padding:.85rem 1.1rem; font-size:.9rem; font-family:'Inter',sans-serif; outline:none; width:100%; cursor:pointer; }
+.cta-select option { background:#DD536C; color:#fff; }
+.cta-btn { background:#12082E; color:#fff; font-size:.88rem; font-weight:700; padding:1rem 2rem; width:100%; text-align:center; border:none; font-family:'Inter',sans-serif; cursor:pointer; transition:background .2s; }
+.cta-btn:hover { background:#8CEBB4; color:#0a3d26; }
+.cta-note { font-size:.7rem; color:rgba(255,255,255,.4); text-align:center; }
+
+/* ── FOOTER ── */
+footer { background:#12082E; color:rgba(255,255,255,.85); padding:4rem 5% 2rem; }
+.ft-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:1.5rem; }
+.ft-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:.6rem; }
+.ft-logo span { color:#DD536C; }
+.ft-desc { font-size:.8rem; color:rgba(255,255,255,.35); line-height:1.7; margin-bottom:1.2rem; }
+.ft-badge { display:inline-flex; align-items:center; gap:.4rem; background:rgba(26,145,98,.15); border:1px solid rgba(26,145,98,.3); padding:.3rem .7rem; font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#8CEBB4; }
+.ft-badge-dot { width:5px; height:5px; border-radius:50%; background:#8CEBB4; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.ft-head { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#8CEBB4; margin-bottom:1rem; }
+.ft-list { list-style:none; }
+.ft-list li { margin-bottom:.4rem; }
+.ft-list a { font-size:.8rem; color:rgba(255,255,255,.35); text-decoration:none; transition:color .2s; }
+.ft-list a:hover { color:#fff; }
+.ft-bottom { display:flex; justify-content:space-between; font-size:.7rem; color:rgba(255,255,255,.2); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(22px); transition:opacity .7s ease,transform .7s ease; }
+.rv.on { opacity:1; transform:none; }
+.rv2 { transition-delay:.1s; } .rv3 { transition-delay:.2s; } .rv4 { transition-delay:.3s; }
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .hero-title-row { gap:1.5rem; }
+  .hero-left h1 { font-size:3rem; }
+  .stats { grid-template-columns:1fr 1fr; }
+  .intro { grid-template-columns:1fr; gap:2rem; }
+  .membres-grid { grid-template-columns:1fr 1fr; }
+  .feat-grid { grid-template-columns:1fr 1fr; }
+  .comm-grid { grid-template-columns:1fr; }
+  .cta-section { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr 1fr; gap:2.5rem; }
+  .ft-bottom { flex-direction:column; gap:.5rem; }
+  .nav-back span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Expertise <span>Afrique</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Retour à l'accueil</span>
+    </a>
+    <div class="nav-badge">Réseau Kalema</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<!-- HERO + STATS -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-deco"></div>
+    <div class="hero-breadcrumb">Expertise Afrique · <span>Partage</span></div>
+    <div class="hero-tag">Pilier 03 — Partage</div>
+    <div class="hero-title-row">
+      <h1>Réseau<br><em>Kalema</em></h1>
+      <a href="#rejoindre" class="btn-hero-main">Rejoindre le réseau →</a>
+    </div>
+    <p>Le réseau professionnel africain souverain. Connectez, collaborez et co-créez avec des experts, entrepreneurs et institutions à travers tout le continent.</p>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="stat-n" data-count="1200">0</div>
+      <div class="stat-l">Membres actifs</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" data-count="54">0</div>
+      <div class="stat-l">Pays représentés</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" data-count="+38">0</div>
+      <div class="stat-l">Opportunités</div>
+    </div>
+ 
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Profil professionnel</span>
+    <span class="strip-item">Mise en réseau</span>
+    <span class="strip-item">Opportunités & Projets</span>
+    <span class="strip-item">Souveraineté africaine</span>
+    <span class="strip-item">Profil professionnel</span>
+    <span class="strip-item">Mise en réseau</span>
+    <span class="strip-item">Opportunités & Projets</span>
+    <span class="strip-item">Souveraineté africaine</span>
+  </div>
+</div>
+
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-label rv">
+    <div class="intro-num">03</div>
+    <div class="intro-tag">Notre vision</div>
+  </div>
+  <div class="intro-content rv rv2">
+    <h2>Le LinkedIn africain,<br><em>souverain</em> et engagé</h2>
+    <p>Le Réseau Kalema n'est pas une plateforme de plus — c'est un espace numérique africain conçu pour ceux qui construisent le continent. Vos données restent en Afrique. Votre réseau appartient à l'Afrique.</p>
+    <p>Kalema connecte les bâtisseurs d'un continent en mouvement, autour de valeurs communes : excellence, collaboration et souveraineté.</p>
+    <div class="intro-tags">
+      <span class="itag">Networking</span>
+      <span class="itag">Collaboration</span>
+      <span class="itag">Opportunités</span>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- MEMBRES -->
+<section class="membres">
+  <div class="section-head rv">
+    <h2>Membres <em>en vue</em></h2>
+    <span class="section-sub">Quelques profils du réseau</span>
+  </div>
+  <div class="membres-grid">
+
+    <div class="membre-card rv">
+      <div class="mc-top">
+        <div class="mc-avatar" style="background:#DD536C">SF</div>
+        <div>
+          <div class="mc-name">Sofiane Fakhfakh</div>
+          <div class="mc-country">Tunisia</div>
+        </div>
+      </div>
+      <div class="mc-domain" style="background:#DD536C18;color:#DD536C">Finance</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Expert</span>
+        <span class="mc-tag">Finance</span>
+        <span class="mc-tag">Impact</span>
+      </div>
+      <a href="#rejoindre" class="mc-connect">Se connecter</a>
+    </div>
+
+    <div class="membre-card rv rv2">
+      <div class="mc-top">
+        <div class="mc-avatar" style="background:#390CA3">OB</div>
+        <div>
+          <div class="mc-name">Oumar Bah</div>
+          <div class="mc-country">Abidjan, Côte d'Ivoire</div>
+        </div>
+      </div>
+      <div class="mc-domain" style="background:#390CA318;color:#390CA3">Recherche</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Investissement</span>
+        <span class="mc-tag">Politique fiscale</span>
+      </div>
+      <a href="#rejoindre" class="mc-connect">Se connecter</a>
+    </div>
+
+    <div class="membre-card rv rv4">
+      <div class="mc-top">
+        <div class="mc-avatar" style="background:#12082E">KM</div>
+        <div>
+          <div class="mc-name">Kofi Mensah</div>
+          <div class="mc-country">🇬🇭 Accra, Ghana</div>
+        </div>
+      </div>
+      <div class="mc-domain" style="background:rgba(18,8,46,.06);color:#12082E">Tech & Digital</div>
+      <div class="mc-tags">
+        <span class="mc-tag">Dev</span>
+        <span class="mc-tag">FinTech</span>
+        <span class="mc-tag">Open Source</span>
+      </div>
+      <a href="#rejoindre" class="mc-connect">Se connecter</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section class="features">
+  <div class="feat-header rv">
+    <div class="feat-label">Ce que vous pouvez faire</div>
+    <h2>Tout ce dont vous avez besoin pour <em>connecter</em></h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card rv">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="7" r="4" stroke="#1a9162" stroke-width="1.4"/>
+          <path d="M3 17c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#1a9162" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feat-name">Profil professionnel</div>
+      <p class="feat-desc">Compétences, expériences et projets en un seul endroit.</p>
+    </div>
+    <div class="feat-card rv rv2">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle cx="6" cy="10" r="2.5" stroke="#DD536C" stroke-width="1.4"/>
+          <circle cx="14" cy="5" r="2.5" stroke="#DD536C" stroke-width="1.4"/>
+          <circle cx="14" cy="15" r="2.5" stroke="#DD536C" stroke-width="1.4"/>
+          <path d="M8.5 9L11.5 6.5M8.5 11L11.5 13.5" stroke="#DD536C" stroke-width="1.2" opacity=".7"/>
+        </svg>
+      </div>
+      <div class="feat-name">Mise en réseau</div>
+      <p class="feat-desc">Connectez-vous avec des professionnels qui partagent vos domaines d'intérêt à travers les 54 pays africains.</p>
+    </div>
+    <div class="feat-card rv rv3">
+      <div class="feat-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="5" width="16" height="11" rx="2" stroke="#390CA3" stroke-width="1.4"/>
+          <path d="M2 9h16" stroke="#390CA3" stroke-width="1"/>
+          <circle cx="6" cy="13" r="1.5" fill="#390CA3" opacity=".4"/>
+          <path d="M9 12.5h7" stroke="#390CA3" stroke-width="1" opacity=".4"/>
+          <path d="M9 14.5h5" stroke="#390CA3" stroke-width="1" opacity=".3"/>
+        </svg>
+      </div>
+ 
+      <div class="feat-name">Opportunités & Projets</div>
+      <p class="feat-desc">Publiez ou découvrez des appels à collaboration, offres d'emploi, appels à projets et partenariats stratégiques.</p>
+    </div>
+  
+  </div>
+</section>
+
+<!-- COMMUNAUTÉS -->
+<section class="communautes">
+  <div class="comm-header rv">
+    <div class="comm-label">Explorer</div>
+    <h2>Communautés <em>actives</em></h2>
+  </div>
+  <div class="comm-grid">
+    <div class="comm-card rv">
+      <div class="comm-bar"></div>
+      <div class="comm-name">Entrepreneurs Africains</div>
+      <p class="comm-desc">La plus grande communauté de fondateurs et entrepreneurs du continent. Échanges et co-fondation.</p>
+      <div class="comm-meta">
+    
+        <a href="#rejoindre" class="comm-join">Rejoindre →</a>
+      </div>
+    </div>
+    <div class="comm-card rv rv2">
+      <div class="comm-bar"></div>
+      <div class="comm-name">Finance & Investissement</div>
+      <p class="comm-desc">Analystes, banquiers, investisseurs et experts en politique monétaire africaine réunis dans un même espace.</p>
+      <div class="comm-meta">
+    
+        <a href="#rejoindre" class="comm-join">Rejoindre →</a>
+      </div>
+    </div>
+
+    <div class="comm-card rv">
+      <div class="comm-bar"></div>
+      <div class="comm-name">Politiques Publiques</div>
+      <p class="comm-desc">Décideurs, chercheurs et praticiens des politiques publiques qui débattent et co-construisent des solutions africaines.</p>
+      <div class="comm-meta">
+        <a href="#rejoindre" class="comm-join">Rejoindre →</a>
+      </div>
+    </div>
+
+    <div class="comm-card rv rv3">
+      <div class="comm-bar"></div>
+      <div class="comm-name">Recherche</div>
+      <p class="comm-desc">Chercheurs, doctorants et universitaires africains pour partager travaux, appels à publication et collaborations .</p>
+      <div class="comm-meta">
+      
+        <a href="#rejoindre" class="comm-join">Rejoindre →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section" id="rejoindre">
+  <div class="cta-left rv">
+    <div class="cta-tag">Rejoindre Kalema</div>
+    <h2>Votre réseau africain vous <em>attend</em></h2>
+    <p>Créez votre profil en 2 minutes. Rejoignez des professionnels africains qui collaborent, créent et décident ensemble.</p>
+  </div>
+  <div class="cta-right rv rv2">
+
+    
+<a href="https://expertiseafrique.com/kalema/" class="cta-btn" target="_blank" rel="noopener noreferrer">
+  Créer mon profil Kalema →
+</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">Expertise <span>Afrique</span></div>
+      <p class="ft-desc">L'intelligence collective africaine structurée en quatre piliers pour transformer le continent.</p>
+    
+    </div>
+    <div>
+      <div class="ft-head">Services</div>
+      <ul class="ft-list">
+        <li><a href="thinktank.html">ThinkTank</a></li>
+        <li><a href="moodle.html">Moodle</a></li>
+        <li><a href="#">Réseau Kalema</a></li>
+        <li><a href="mentorat.html">Mentorat</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Expertise Afrique — Tous droits réservés</span>
+    
+  </div>
+</footer>
+
+<script>
+// Counters
+function countUp(el, target, dur=1400) {
+  let s=null;
+  (function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1), e=1-Math.pow(1-p,3);
+    el.textContent=target>100?Math.floor(e*target).toLocaleString():Math.floor(e*target);
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent=target>100?target.toLocaleString():target;
+  })(performance.now());
+}
+const cObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('[data-count]').forEach(el=>countUp(el,+el.dataset.count));cObs.disconnect();}});
+},{threshold:.3});
+const fc=document.querySelector('[data-count]');
+if(fc) cObs.observe(fc.parentElement);
+
+// Reveal
+const rObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>rObs.observe(el));
+</script>
+</body>
+</html>
